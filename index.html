@@ -13,7 +13,7 @@
       <div class="nav-bar"></div>
 
       <div class="cart">Cart({{ cart }})</div>
-      <product-display :premium="premium"></product-display>
+      <product-display :premium="premium" :cart-filling="cart.length > 0" @add-to-cart="addToCart" @rem-from-cart="remFromCart"></product-display>
     </div>
 
     <!-- Import App -->
