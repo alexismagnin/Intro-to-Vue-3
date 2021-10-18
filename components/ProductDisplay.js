@@ -3,6 +3,10 @@ app.component('product-display', {
     premium: {
       type: Boolean,
       required: true
+    },
+    cartFilling: {
+      type: Boolean,
+      required: true
     }
   },
   template: 
@@ -39,6 +43,14 @@ app.component('product-display', {
           Add to Cart
         </button>
 
+        <button 
+          class="button" 
+          :class="{ disabledButton: !cartFilling }" 
+          :disabled="!cartFilling" 
+          v-on:click="removeFromCart">
+          Remove from Cart
+        </button>
+
         <review-list v-if="reviews.length" :reviews="reviews"></review-list>
         <review-form @review-submitted="newReview"></review-form>
 
@@ -60,7 +72,10 @@ app.component('product-display', {
   },
   methods: {
       addToCart() {
-          this.$emit('add-to-cart', this.variants[this.selectedVariant].id)
+        this.$emit('add-to-cart',this.variants[this.selectedVariant].id,1)
+      },
+      removeFromCart() {
+          this.$emit('rem-from-cart',this.variants[this.selectedVariant].id,1)
       },
       updateVariant(index) {
           this.selectedVariant = index
