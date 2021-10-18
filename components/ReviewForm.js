@@ -18,6 +18,12 @@ app.component('review-form',{
       <option>1</option>
     </select>
 
+    <br><div class="group">
+    <label class ="item" for="recommend">Would you recommend this product?</label>
+    <input class ="item" type="checkbox" id="recommend" v-model="isRecommended">
+    <label class ="item" for="recommend"> Yes</label>
+    </div>
+
     <input class="button" type="submit" value="Submit">
   </form>`,
 
@@ -25,21 +31,25 @@ app.component('review-form',{
     return {
       name: '',
       review: '',
-      rating: null
+      rating: null,
+      isRecommended: false
     }
   },
   methods: {
     onSubmit(){
+      console.log(this.isRecommended)
         let newReview = {
             name: this.name,
             review: this.review,
-            rating: this.rating
+            rating: this.rating,
+            isRecommended: this.isRecommended
         }
         this.$emit('review-submitted', newReview)
 
         this.name = ''
         this.review = ''
         this.rating = null
+        this.isRecommended = false
     }
   }
 })
